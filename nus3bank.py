@@ -105,6 +105,7 @@ for i in range(toneCount):
 #	print hex(tones[i].packOffset) + " - " + hex(tones[i].size)
 	nus3.seek(packOffset + 8 + tones[i].packOffset)
 	fourcc = nus3.read(4)
+	nus3.seek(-4,1)
 	if fourcc == "IDSP":
 		tones[i].ext = ".idsp"
 	elif fourcc == "RIFF":
