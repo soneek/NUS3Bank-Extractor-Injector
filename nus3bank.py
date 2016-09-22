@@ -104,7 +104,11 @@ for i in range(toneCount):
 	tones[i].size = readu32le(nus3)
 #	print hex(tones[i].packOffset) + " - " + hex(tones[i].size)
 	nus3.seek(packOffset + 8 + tones[i].packOffset)
-	tones[i].ext = ".idsp"
+	fourcc = nus3.read(4)
+	if fourcc == "IDSP":
+		tones[i].ext = ".idsp"
+	elif fourcc == "RIFF":
+		tones[i].ext = ".at9"
 	outfile = open(outfolder + "/" + tones[i].name + tones[i].ext, "wb")
 	outfile.write(nus3.read(tones[i].size))
 	outfile.close()
